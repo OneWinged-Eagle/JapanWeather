@@ -1,0 +1,41 @@
+{
+	"name": "japan_weather",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"serve": "vue-cli-service serve",
+		"build": "vue-cli-service build",
+		"lint": "vue-cli-service lint"
+	},
+	"dependencies": {
+		"@babel/polyfill": "^7.4.4",
+		"axios": "^0.18.1",
+		"material-design-icons-iconfont": "^3.0.3",
+		"prettier": "^1.18.2",
+		"register-service-worker": "^1.6.2",
+		"roboto-fontface": "*",
+		"tslint-config-prettier": "^1.18.0",
+		"vue": "^2.6.10",
+		"vue-class-component": "^6.3.2",
+		"vue-router": "^3.1.2",
+		"vuetify": "^1.5.16"
+	},
+	"devDependencies": {
+		"@types/jest": "^23.1.4",
+		"@vue/cli-plugin-babel": "^3.10.0",
+		"@vue/cli-plugin-e2e-nightwatch": "^3.10.0",
+		"@vue/cli-plugin-pwa": "^3.10.0",
+		"@vue/cli-plugin-typescript": "^3.10.0",
+		"@vue/cli-plugin-unit-jest": "^3.10.0",
+		"@vue/cli-service": "^3.10.0",
+		"babel-core": "7.0.0-bridge.0",
+		"fibers": "^3.1.1",
+		"sass": "^1.22.10",
+		"sass-loader": "^7.3.1",
+		"ts-jest": "^23.0.0",
+		"typescript": "^3.5.3",
+		"vue-cli-plugin-vuetify": "^0.4.6",
+		"vue-property-decorator": "^7.3.0",
+		"vue-template-compiler": "^2.6.10"
+	}
+}
