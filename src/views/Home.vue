@@ -12,8 +12,10 @@ import Component from "vue-class-component"
 
 import { prefectures } from "@/utils/const/prefectures"
 
-@Component
+@Component({
+	name: "Home"
+})
 export default class Home extends Vue {
-  prefectures = prefectures
+	prefectures = prefectures
 }
 </script>

@@ -1,17 +1,17 @@
 <template>
-  <v-navigation-drawer :value="drawer" app fixed>
-    <v-list dense>
-      <v-list-tile :to="{ name: 'Home' }" exact>
-        <v-list-tile-action>
-          <v-icon>home</v-icon>
-        </v-list-tile-action>
+	<v-navigation-drawer :value="drawer" @input="$emit('update:drawer', $event)" app>
+		<v-list dense>
+			<v-list-item :to="{ name: 'Home' }" exact>
+				<v-list-item-icon>
+					<v-icon>mdi-home</v-icon>
+				</v-list-item-icon>
 
-        <v-list-tile-content>
-          <v-list-tile-title>Home</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
-    </v-list>
-  </v-navigation-drawer>
+				<v-list-item-content>
+					<v-list-item-title>Home</v-list-item-title>
+				</v-list-item-content>
+			</v-list-item>
+		</v-list>
+	</v-navigation-drawer>
 </template>
 
 <script lang="ts">
@@ -19,9 +19,10 @@ import Vue from "vue"
 import Component from "vue-class-component"
 
 @Component({
+	name: "Drawer",
 	props: {
 		drawer: { type: Boolean, required: true }
 	}
 })
-export default class Drawer extends Vue {}
+export default class Drawer extends Vue { }
 </script>

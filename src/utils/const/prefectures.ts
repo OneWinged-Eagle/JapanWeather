@@ -1,4 +1,4 @@
-type Prefecture = {
+interface Prefecture {
 	name: string
 	capital: string
 	d: string

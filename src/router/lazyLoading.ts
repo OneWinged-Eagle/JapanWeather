@@ -1,2 +1,2 @@
 export const lazyLoading = (name: string) => () =>
-  import(`@/pages/${name}.vue`);
+	import(`@/views/${name}.vue`)

@@ -9,6 +9,8 @@
 import Vue from "vue"
 import Component from "vue-class-component"
 
-@Component
+@Component({
+	name: "Footer"
+})
 export default class Footer extends Vue { }
 </script>
