@@ -5,6 +5,7 @@ import { getErrorMessage } from "@/utils/getErrorMessage"
 import { Forecast } from "@/utils/types"
 
 const key = "92904f6f97dcc4b468154f1fb1ce0cf3"
+const params = `&appid=${key}&units=metric`
 
 /** A class countaining all base http operations used to communicate with the API. */
 export class ApiCore {
@@ -40,7 +41,7 @@ export class ApiCore {
 		console.info(`Fetching forecast for ${city} city...`)
 
 		return this.axiosInstance
-			.get(`/forecast/?q=${city}&appid=${key}`)
+			.get<undefined, Forecast>(`/forecast/?q=${city}${params}`)
 			.then((forecast: Forecast) => {
 				console.info(`${city} forecast fetched!`)
 				return forecast

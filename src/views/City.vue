@@ -2,7 +2,34 @@
 	<section>
 		<h1>{{ name }}</h1>
 
-		<p v-if="forecast">{{ forecast }}</p>
+		<template v-if="forecast">
+			<div v-for="hourlyWeather in forecast.list" :key="hourlyWeather.dt">
+				<h2>{{ new Date(hourlyWeather.dt * 1000) }}</h2>
+
+				<p>
+					Temperature:
+					<b>{{ hourlyWeather.main.temp }}&#8451;</b>
+				</p>
+
+				<p>Humidity: {{ hourlyWeather.main.humidity }}%</p>
+
+				<p>Weather: {{ hourlyWeather.weather[0].main }} ({{ hourlyWeather.weather[0].description }})</p>
+
+				<p>Wind: {{ hourlyWeather.wind.speed }}m/s</p>
+
+				<p v-if="hourlyWeather.rain && (hourlyWeather.rain['1h'] || hourlyWeather.rain['3h'])">
+					Rain:
+					<span v-if="hourlyWeather.rain['1h']">{{ hourlyWeather.rain['1h'] }}mm for the last 1h</span>
+					<span v-if="hourlyWeather.rain['3h']">{{ hourlyWeather.rain['3h'] }}mm for the last 3h</span>
+				</p>
+
+				<p v-if="hourlyWeather.snow && (hourlyWeather.snow['1h'] || hourlyWeather.snow['3h'])">
+					Snow:
+					<span v-if="hourlyWeather.snow['1h']">{{ hourlyWeather.snow['1h'] }}mm for the last 1h</span>
+					<span v-if="hourlyWeather.snow['3h']">{{ hourlyWeather.snow['3h'] }}mm for the last 3h</span>
+				</p>
+			</div>
+		</template>
 	</section>
 </template>
 

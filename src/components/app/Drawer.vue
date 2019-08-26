@@ -1,6 +1,6 @@
 <template>
 	<v-navigation-drawer :value="drawer" @input="$emit('update:drawer', $event)" app>
-		<v-list dense>
+		<v-list dense shaped>
 			<v-list-item :to="{ name: 'Home' }" exact>
 				<v-list-item-icon>
 					<v-icon>mdi-map-search</v-icon>
