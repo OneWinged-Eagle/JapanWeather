@@ -13,6 +13,11 @@ export const router = new Router({
 			path: "/",
 			name: "Home",
 			component: lazyLoading("Home")
+		},
+		{
+			path: "/city/:name",
+			name: "City",
+			component: lazyLoading("City")
 		}
 	]
 })

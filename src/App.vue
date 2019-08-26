@@ -1,5 +1,7 @@
 <template>
 	<v-app>
+		<app-snackbar />
+
 		<app-drawer :drawer.sync="drawer" />
 
 		<app-toolbar :drawer.sync="drawer" />
@@ -20,16 +22,17 @@
 import Vue from "vue"
 import Component from "vue-class-component"
 
+import AppSnackbar from "./components/app/Snackbar.vue"
 import AppDrawer from "./components/app/Drawer.vue"
 import AppToolbar from "./components/app/Toolbar.vue"
 import AppFooter from "./components/app/Footer.vue"
 
 @Component({
-	components: { AppDrawer, AppToolbar, AppFooter },
+	components: { AppSnackbar, AppDrawer, AppToolbar, AppFooter },
 	name: "App"
 })
 export default class App extends Vue {
-	drawer = false
+	private drawer = false
 
 	beforeCreate() {
 		this.$vuetify.theme.dark = true
