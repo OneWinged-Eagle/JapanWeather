@@ -1,6 +1,7 @@
 interface Weather {
 	main: string,
-	description: string
+	description: string,
+	icon: string
 }
 
 interface HourlyForecast {
@@ -10,15 +11,15 @@ interface HourlyForecast {
 		humidity: number
 	},
 	weather: Weather[],
+	clouds: { all: number },
 	wind: {
-		speed: number
+		speed: number,
+		deg: number
 	},
 	rain?: {
-		"1h"?: number,
 		"3h"?: number
 	},
 	snow?: {
-		"1h"?: number,
 		"3h"?: number
 	}
 }

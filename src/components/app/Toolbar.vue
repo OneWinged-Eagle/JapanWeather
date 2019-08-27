@@ -6,7 +6,14 @@
 
 		<v-spacer />
 
-		<v-autocomplete label="Search Japanese city" :items="capitals" hide-details single-line />
+		<v-autocomplete
+			label="Search Japanese city"
+			:items="capitals"
+			:value="$route.params.name"
+			hide-details
+			single-line
+			@change="goTo"
+		/>
 
 		<v-spacer />
 	</v-app-bar>
@@ -25,10 +32,12 @@ import { prefectures } from "@/utils/const/prefectures"
 	}
 })
 export default class Toolbar extends Vue {
-	private readonly prefectures = prefectures
-
 	get capitals(): string[] {
-		return this.prefectures.map((p) => p.capital)
+		return prefectures.map((p) => p.capital)
+	}
+
+	goTo(capital: string) {
+		this.$router.push({ name: "City", params: { name: capital } })
 	}
 }
 </script>

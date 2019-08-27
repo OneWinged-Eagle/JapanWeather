@@ -1,7 +1,18 @@
 <template>
 	<v-footer app>
-		<v-spacer></v-spacer>
-		<div>&copy; {{ new Date().getFullYear() }}</div>
+		<span class="caption">
+			<v-icon small>mdi-code-braces</v-icon>&nbsp;with
+			<v-icon color="error" small>mdi-heart</v-icon>&nbsp;by
+			<a href="https://github.com/OneWinged-Eagle" target="_blank">OneWinged-Eagle</a>.
+		</span>
+
+		<v-spacer />
+
+		<span class="caption">
+			<a href="https://github.com/OneWinged-Eagle/JapanWeather" target="_blank">
+				<v-icon>mdi-github-circle</v-icon>
+			</a>
+		</span>
 	</v-footer>
 </template>
 
