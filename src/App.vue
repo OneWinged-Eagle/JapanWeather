@@ -7,7 +7,7 @@
 		<app-toolbar :drawer.sync="drawer" />
 
 		<v-content>
-			<v-container fill-height fluid>
+			<v-container fluid tag="section" class="page-wrapper">
 				<v-fade-transition mode="out-in">
 					<router-view :key="$route.fullPath" />
 				</v-fade-transition>
@@ -39,3 +39,9 @@ export default class App extends Vue {
 	}
 }
 </script>
+
+<style scoped>
+.page-wrapper {
+	min-height: calc(100vh - 64px - 36px);
+}
+</style>

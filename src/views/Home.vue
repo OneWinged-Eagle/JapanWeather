@@ -1,15 +1,17 @@
 <template>
-	<section>
+	<v-container>
 		<svg viewBox="0 0 437.33432 516.01587">
 			<router-link
 				v-for="prefecture in prefectures"
 				:key="prefecture.name"
 				:to="{ name: 'City', params: { name: prefecture.capital } }"
 			>
-				<path v-bind="prefecture" />
+				<path v-bind="prefecture">
+					<title>{{ prefecture.capital }} ({{ prefecture.name }})</title>
+				</path>
 			</router-link>
 		</svg>
-	</section>
+	</v-container>
 </template>
 
 <script lang="ts">
@@ -28,11 +30,12 @@ export default class Home extends Vue {
 
 <style scoped>
 path {
-	fill: var(--v-secondary-darken2);
-	stroke: var(--v-primary-darken2);
+	fill: var(--v-info-darken2);
+	stroke: var(--v-secondary-darken2);
+	stroke-width: 0.1;
 }
 
 path:hover {
-	fill: var(--v-accent-darken4);
+	fill: var(--v-secondary-darken4);
 }
 </style>

@@ -11,6 +11,9 @@
 		<span class="caption">
 			<a href="https://github.com/OneWinged-Eagle/JapanWeather" target="_blank">
 				<v-icon>mdi-github-circle</v-icon>
+				<sup>
+					<v-icon x-small>mdi-open-in-new</v-icon>
+				</sup>
 			</a>
 		</span>
 	</v-footer>

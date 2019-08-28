@@ -11,40 +11,53 @@ const params = `&appid=${key}&units=metric`
 export class ApiCore {
 	axiosInstance: AxiosInstance
 
-	loading: boolean = false
-
 	constructor() {
 		this.axiosInstance = axios.create({ baseURL: "https://api.openweathermap.org/data/2.5/" })
 
 		this.axiosInstance.interceptors.request.use((config: AxiosRequestConfig) => {
-			this.loading = true
 			return config
 		},
 			(error: AxiosError) => {
-				this.loading = false
 				console.error("Error during request:", error)
 				return Promise.reject(getErrorMessage(error))
 			})
 
 		this.axiosInstance.interceptors.response.use((response: AxiosResponse) => {
-			this.loading = false
 			return response.data
 		},
 			(error: AxiosError) => {
-				this.loading = false
 				console.error("Error during response:", error)
 				return Promise.reject(getErrorMessage(error))
 			})
 	}
 
-	async getForecast(city: string): Promise<Forecast | undefined> {
+	async getWeather(city: string): Promise<Forecast | undefined> {
+		console.info(`Fetching weather for ${city} city...`)
+
+		return this.axiosInstance
+			.get<undefined, Forecast>(`/weather/?q=${city}${params}`)
+			.then((forecast: Forecast) => {
+				console.info(`${city} weather fetched!`)
+				return forecast
+			})
+			.catch((error: string) => {
+				actions.show({ colour: "warning", text: `Getting weather failed: ${error}`, timeout: 0 })
+				return undefined
+			})
+	}
+
+	async getForecast(city: string): Promise<Forecast[] | undefined> {
+		interface ForecastResponse {
+			list: Forecast[]
+		}
+
 		console.info(`Fetching forecast for ${city} city...`)
 
 		return this.axiosInstance
-			.get<undefined, Forecast>(`/forecast/?q=${city}${params}`)
-			.then((forecast: Forecast) => {
+			.get<undefined, ForecastResponse>(`/forecast/?q=${city}${params}`)
+			.then((forecast: ForecastResponse) => {
 				console.info(`${city} forecast fetched!`)
-				return forecast
+				return forecast.list
 			})
 			.catch((error: string) => {
 				actions.show({ colour: "warning", text: `Getting forecast failed: ${error}`, timeout: 0 })

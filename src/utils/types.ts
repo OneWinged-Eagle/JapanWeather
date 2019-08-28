@@ -3,8 +3,7 @@ interface Weather {
 	description: string,
 	icon: string
 }
-
-interface HourlyForecast {
+export interface Forecast {
 	dt: number,
 	main: {
 		temp: number,
@@ -17,12 +16,22 @@ interface HourlyForecast {
 		deg: number
 	},
 	rain?: {
+		"1h"?: number
 		"3h"?: number
 	},
 	snow?: {
+		"1h"?: number
 		"3h"?: number
 	}
 }
-export interface Forecast {
-	list: HourlyForecast[]
+
+export interface DailyForecast {
+	dt: Date,
+	minTemp: number,
+	maxTemp: number,
+	humidity: number,
+	clouds: number,
+	wind: number,
+	rain?: number,
+	snow?: number
 }

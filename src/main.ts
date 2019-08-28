@@ -4,6 +4,7 @@ import { router } from "./router"
 import "./registerServiceWorker"
 import vuetify from "./plugins/vuetify"
 import "roboto-fontface/css/roboto/roboto-fontface.css"
+import "./filters"
 
 Vue.config.productionTip = false
 

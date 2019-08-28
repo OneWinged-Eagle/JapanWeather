@@ -1,89 +1,59 @@
 <template>
-	<section>
-		<h1 class="display-3 font-weight-medium">
-			{{ name }}
-			<a v-if="wikipedia" :href="wikipedia" target="_blank">
-				<v-icon x-large>mdi-wikipedia</v-icon>
-			</a>
-		</h1>
+	<v-container>
+		<v-row justify="center">
+			<v-col cols="auto">
+				<h1 class="display-3 font-weight-bold d-inline">{{ name }}</h1>
 
-		<template v-if="forecast">
-			<v-hover v-for="hourlyWeather in forecast.list" :key="hourlyWeather.dt">
-				<v-card slot-scope="{ hover }" :class="`elevation-${hover ? 24 : 12}`" color="primary">
-					<v-card-title>
-						<h2>{{ new Date(hourlyWeather.dt * 1000) }}</h2>
-					</v-card-title>
+				<a v-if="wikipedia" :href="wikipedia" target="_blank">
+					<v-icon x-large>mdi-wikipedia</v-icon>
+					<sup>
+						<v-icon x-small>mdi-open-in-new</v-icon>
+					</sup>
+				</a>
+			</v-col>
+		</v-row>
 
-					<v-card-text>
-						<v-container grid-list-xs>
-							<v-layout row wrap>
-								<v-flex xs4>
-									<v-icon x-large>mdi-thermometer-lines</v-icon>
-									{{ hourlyWeather.main.temp }}&#8451;
-								</v-flex>
+		<v-row v-if="forecast" justify="center">
+			<v-col cols="auto">
+				<now :forecast="forecast" />
+			</v-col>
+		</v-row>
 
-								<v-flex xs4>
-									<v-icon x-large>mdi-water-percent</v-icon>
-									{{ hourlyWeather.main.humidity }}%
-								</v-flex>
-
-								<v-flex xs4 d-flex>
-									<v-img
-										:src="`http://openweathermap.org/img/wn/${hourlyWeather.weather[0].icon}@2x.png`"
-										max-width="40"
-										max-height="40"
-									/>
-									{{ hourlyWeather.weather[0].main }} ({{ hourlyWeather.weather[0].description }})
-								</v-flex>
-
-								<v-flex xs4>
-									<v-icon x-large>mdi-cloud</v-icon>
-									{{ hourlyWeather.clouds.all }}%
-								</v-flex>
-
-								<v-flex xs4>
-									<v-icon x-large>mdi-weather-windy</v-icon>
-									{{ hourlyWeather.wind.speed }}m/s ({{ hourlyWeather.wind.deg }} deg)
-								</v-flex>
-
-								<v-flex
-									v-if="hourlyWeather.rain && (hourlyWeather.rain['1h'] || hourlyWeather.rain['3h'])"
-									xs4
-								>
-									<v-icon x-large>mdi-water</v-icon>
-									<span v-if="hourlyWeather.rain['3h']">{{ hourlyWeather.rain['3h'] }}mm for the last 3h</span>
-								</v-flex>
-
-								<v-flex
-									v-if="hourlyWeather.snow && (hourlyWeather.snow['1h'] || hourlyWeather.snow['3h'])"
-									xs4
-								>
-									<v-icon x-large>mdi-snowflake</v-icon>
-									<span v-if="hourlyWeather.snow['3h']">{{ hourlyWeather.snow['3h'] }}mm for the last 3h</span>
-								</v-flex>
-							</v-layout>
-						</v-container>
-					</v-card-text>
-				</v-card>
-			</v-hover>
-		</template>
-	</section>
+		<v-row v-if="dailyForecasts" justify="space-around">
+			<v-col
+				v-for="dailyForecast in dailyForecasts"
+				:key="dailyForecast.dt.getTime()"
+				cols="12"
+				sm="6"
+				md="4"
+				lg="3"
+				xl="2"
+			>
+				<day :dailyForecast="dailyForecast" />
+			</v-col>
+		</v-row>
+	</v-container>
 </template>
 
 <script lang="ts">
 import Vue from "vue"
 import Component from "vue-class-component"
 
+import Now from "@/components/city/Now.vue"
+import Day from "@/components/city/Day.vue"
 import { ApiCore } from "@/services/api/ApiCore"
-import { Forecast } from "@/utils/types"
+import { forecastsToDailyForecasts } from "@/utils/forecastsToDailyForecasts"
+import { Forecast, DailyForecast } from "@/utils/types"
 import { prefectures } from "@/utils/const/prefectures"
 
 @Component({
+	components: { Now, Day },
 	name: "City"
 })
 export default class City extends Vue {
 	private name = ""
 	private forecast: Forecast | null = null
+	private dailyForecasts: DailyForecast[] | null = null
 	private readonly apiCore = new ApiCore()
 
 	get wikipedia(): string {
@@ -93,8 +63,12 @@ export default class City extends Vue {
 	created() {
 		this.name = this.$route.params.name
 
-		this.apiCore.getForecast(this.name).then((forecast) => {
+		this.apiCore.getWeather(this.name).then((forecast) => {
 			this.forecast = forecast ? forecast : null
+		})
+
+		this.apiCore.getForecast(this.name).then((forecasts) => {
+			this.dailyForecasts = forecasts ? forecastsToDailyForecasts(forecasts) : null
 		})
 	}
 }
