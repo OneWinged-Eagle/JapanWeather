@@ -7,7 +7,7 @@
 
 			<v-card-text>
 				<v-container>
-					<v-row justify="space-around">
+					<v-row align="center" justify="space-around">
 						<v-col cols="6">
 							<v-icon large>mdi-thermometer-chevron-down</v-icon>
 							{{ dailyForecast.minTemp | formatNumber }}&#8451;

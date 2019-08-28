@@ -1,13 +1,13 @@
 <template>
 	<v-hover v-slot:default="{ hover }">
-		<v-card :elevation="hover ? 24 : 12" :loading="!forecast" color="info darken-2">
+		<v-card :elevation="hover ? 24 : 12" :loading="!forecast" color="info darken-1">
 			<v-card-title>
 				<h2 class="display-1">Now</h2>
 			</v-card-title>
 
 			<v-card-text v-if="forecast">
 				<v-container>
-					<v-row justify="space-around">
+					<v-row align="center" justify="space-around">
 						<v-col cols="12" md="6" xl="4">
 							<v-icon large>mdi-thermometer-lines</v-icon>
 							{{ forecast.main.temp }}&#8451;

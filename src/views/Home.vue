@@ -1,17 +1,15 @@
 <template>
-	<v-container>
-		<svg viewBox="0 0 437.33432 516.01587">
-			<router-link
-				v-for="prefecture in prefectures"
-				:key="prefecture.name"
-				:to="{ name: 'City', params: { name: prefecture.capital } }"
-			>
-				<path v-bind="prefecture">
-					<title>{{ prefecture.capital }} ({{ prefecture.name }})</title>
-				</path>
-			</router-link>
-		</svg>
-	</v-container>
+	<svg viewBox="0 0 437.33432 516.01587">
+		<router-link
+			v-for="prefecture in prefectures"
+			:key="prefecture.name"
+			:to="{ name: 'City', params: { name: prefecture.capital } }"
+		>
+			<path v-bind="prefecture">
+				<title>{{ prefecture.capital }} ({{ prefecture.name }})</title>
+			</path>
+		</router-link>
+	</svg>
 </template>
 
 <script lang="ts">
@@ -29,6 +27,12 @@ export default class Home extends Vue {
 </script>
 
 <style scoped>
+svg {
+	display: block;
+	margin: 0 auto;
+	max-height: 100vh;
+}
+
 path {
 	fill: var(--v-info-darken2);
 	stroke: var(--v-secondary-darken2);

@@ -1,8 +1,8 @@
 <template>
 	<v-container>
-		<v-row justify="center">
+		<v-row align="center" justify="center">
 			<v-col cols="auto">
-				<h1 class="display-3 font-weight-bold d-inline">{{ name }}</h1>
+				<h1 class="display-3 font-weight-bold d-inline mr-1">{{ name }}</h1>
 
 				<a v-if="wikipedia" :href="wikipedia" target="_blank">
 					<v-icon x-large>mdi-wikipedia</v-icon>
@@ -13,13 +13,13 @@
 			</v-col>
 		</v-row>
 
-		<v-row v-if="forecast" justify="center">
+		<v-row v-if="forecast" align="center" justify="center">
 			<v-col cols="auto">
 				<now :forecast="forecast" />
 			</v-col>
 		</v-row>
 
-		<v-row v-if="dailyForecasts" justify="space-around">
+		<v-row v-if="dailyForecasts" align="center" justify="space-around">
 			<v-col
 				v-for="dailyForecast in dailyForecasts"
 				:key="dailyForecast.dt.getTime()"

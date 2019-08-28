@@ -1,24 +1,10 @@
 import "@mdi/font/css/materialdesignicons.css"
 import Vue from "vue"
-import Vuetify, {
-	VApp,
-	VAppBar,
-	VFooter,
-	VList,
-	VToolbar
-} from "vuetify/lib"
+import Vuetify from "vuetify/lib"
 
 import colours from "vuetify/lib/util/colors"
 
-Vue.use(Vuetify, {
-	components: {
-		VApp,
-		VAppBar,
-		VFooter,
-		VList,
-		VToolbar
-	}
-})
+Vue.use(Vuetify)
 
 export default new Vuetify({
 	theme: {

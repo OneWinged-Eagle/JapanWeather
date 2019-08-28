@@ -10,6 +10,8 @@
 			label="Search Japanese city"
 			:items="capitals"
 			:value="$route.params.name"
+			color="accent"
+			item-color="accent"
 			hide-details
 			single-line
 			@change="goTo"
